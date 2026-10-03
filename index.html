@@ -129,8 +129,6 @@ margin-top:14px
 display:none!important
 }
 
-/* CONTADOR */
-
 .usage{
 background:#eef2f5;
 border-radius:12px;
@@ -139,12 +137,6 @@ margin-bottom:14px;
 font-weight:700;
 text-align:center
 }
-
-.usage strong{
-font-size:18px
-}
-
-/* SUSCRIPCIÓN */
 
 .paywall{
 background:white;
@@ -174,6 +166,53 @@ background:#18202a;
 color:white;
 font-size:16px;
 font-weight:900
+}
+
+.bizumbox{
+background:#eef8f1;
+border:2px solid #a9d8b5;
+border-radius:14px;
+padding:15px;
+margin:15px 0;
+text-align:center
+}
+
+.bizumnumber{
+font-size:25px;
+font-weight:900;
+margin:8px 0
+}
+
+.whatsapp{
+width:100%;
+border:0;
+border-radius:11px;
+padding:13px;
+background:#18202a;
+color:white;
+font-weight:800;
+margin-top:10px
+}
+
+.activate{
+background:#f5f6f8;
+border-radius:14px;
+padding:15px;
+margin-top:15px
+}
+
+.activate button{
+width:100%;
+margin-top:10px
+}
+
+.success{
+background:#eef8f1;
+border:1px solid #a9d8b5;
+border-radius:12px;
+padding:13px;
+font-weight:700;
+text-align:center
 }
 
 .item{
@@ -212,17 +251,6 @@ background:#fafbfc
 .payline{
 padding:8px 0;
 border-bottom:1px solid #e5e7eb
-}
-
-.paybutton{
-width:100%;
-margin-top:10px;
-border:0;
-border-radius:11px;
-padding:12px;
-font-weight:800;
-background:#18202a;
-color:white
 }
 
 .muted{
@@ -297,8 +325,6 @@ Mi negocio
 </div>
 
 
-<!-- NUEVO -->
-
 <section id="new">
 
 <div id="usageBox" class="usage"></div>
@@ -322,12 +348,62 @@ Has utilizado tus 3 presupuestos gratuitos.
 Presupuestos ilimitados para tu negocio.
 </p>
 
-<button onclick="subscribe()">
-⭐ Desbloquear Profesional
+
+<div class="bizumbox">
+
+<div>
+📱 Paga por Bizum
+</div>
+
+<div
+id="bizumNumber"
+class="bizumnumber">
+Configura tu Bizum
+</div>
+
+<div>
+<b>Importe: 4,99 €</b>
+</div>
+
+<button
+class="whatsapp"
+onclick="requestActivation()">
+
+📲 He realizado el pago / Contactar
+
 </button>
 
+</div>
+
+
+<div class="activate">
+
+<h3>
+🔑 ¿Ya has pagado?
+</h3>
+
 <p class="muted">
-Pago mensual de 4,99 €.
+Introduce el código de activación que te ha enviado Presupuestos Fácil.
+</p>
+
+<input
+id="activationCode"
+placeholder="Código de activación"
+autocomplete="off"
+>
+
+<button
+class="primary"
+onclick="activatePremium()">
+
+⭐ Activar Profesional
+
+</button>
+
+</div>
+
+<p class="muted">
+La activación se realiza manualmente después de confirmar el pago.
 </p>
 
 </div>
@@ -467,8 +543,6 @@ class="preview">
 </section>
 
 
-<!-- HISTORIAL -->
-
 <section
 id="history"
 class="hidden">
@@ -485,8 +559,6 @@ Historial
 
 </section>
 
-
-<!-- MI NEGOCIO -->
 
 <section
 id="business"
@@ -594,6 +666,12 @@ Guardar datos
 
 const FREE_LIMIT=3;
 
+/*
+CÓDIGO DE ACTIVACIÓN PARA ESTA VERSIÓN
+Puedes cambiarlo cuando quieras.
+*/
+const ACTIVATION_CODE="PF-4999";
+
 let currentQuote=null;
 
 const $=id=>document.getElementById(id);
@@ -673,6 +751,8 @@ return localStorage.getItem(
 }
 
 
+/* ACTUALIZAR PANTALLA */
+
 function updateCounter(){
 
 let count=getCount();
@@ -711,6 +791,8 @@ form.classList.add("hidden");
 
 wall.classList.remove("hidden");
 
+showBizum();
+
 }else{
 
 box.innerHTML=
@@ -730,14 +812,90 @@ wall.classList.add("hidden");
 }
 
 
-/* SUSCRIPCIÓN */
+/* MOSTRAR BIZUM */
 
-function subscribe(){
+function showBizum(){
+
+let b=
+JSON.parse(
+localStorage.getItem(
+"business"
+)||"{}"
+);
+
+let number=
+b.bizum||"Configura tu Bizum";
+
+$("bizumNumber").textContent=number;
+
+}
+
+
+/* CONTACTAR */
+
+function requestActivation(){
+
+let b=
+JSON.parse(
+localStorage.getItem(
+"business"
+)||"{}"
+);
+
+let number=b.bizum||"";
+
+let text=
+
+"Hola, quiero activar Presupuestos Fácil Profesional por 4,99 € al mes.%0A%0A"+
+"Indícame cómo realizar el pago por Bizum y después te enviaré el comprobante.";
+
+if(number){
+
+text+=
+"%0A%0ABizum: "+number;
+
+}
+
+window.open(
+"https://wa.me/?text="+
+encodeURIComponent(
+decodeURIComponent(text)
+),
+"_blank"
+);
+
+}
+
+
+/* ACTIVAR */
+
+function activatePremium(){
+
+let input=
+$("activationCode").value
+.trim()
+.toUpperCase();
+
+if(input===ACTIVATION_CODE){
+
+localStorage.setItem(
+"presupuestos_premium",
+"true"
+);
+
+updateCounter();
 
 alert(
-"Plan Profesional: 4,99 € al mes.\n\n"+
-"El siguiente paso es conectar un sistema de pago para poder cobrar la suscripción automáticamente."
+"⭐ ¡Profesional activado! Ahora tienes presupuestos ilimitados."
 );
+
+}else{
+
+alert(
+"❌ Código incorrecto. Comprueba el código recibido después de realizar el pago."
+);
+
+}
 
 }
 
@@ -769,12 +927,16 @@ localStorage.setItem(
 JSON.stringify(data)
 );
 
+showBizum();
+
 alert(
 "Datos guardados correctamente."
 );
 
 }
 
+
+/* CARGAR NEGOCIO */
 
 function loadBusiness(){
 
@@ -834,6 +996,8 @@ total:price+(price*tax/100)
 
 }
 
+
+/* GUARDAR */
 
 function saveQuote(){
 
@@ -900,7 +1064,7 @@ updateCounter();
 }
 
 
-/* VISTA PREVIA */
+/* PREVISUALIZAR */
 
 function previewQuote(){
 
@@ -917,7 +1081,7 @@ $("previewCard")
 }
 
 
-/* MOSTRAR PRESUPUESTO */
+/* RENDER */
 
 function renderQuote(q){
 
@@ -966,14 +1130,10 @@ ${b.holder?
 escapeHTML(b.holder):
 ""}
 
-<br>
-
-Concepto:
-Presupuesto ${q.id}
-
 </div>
 
 `;
+
 
 }
 
@@ -1032,9 +1192,7 @@ ${q.total.toFixed(2)} €
 </h3>
 
 ${payment||
-
-"Configura Bizum o transferencia en Mi negocio."
-}
+"Configura Bizum o transferencia en Mi negocio."}
 
 </div>
 
