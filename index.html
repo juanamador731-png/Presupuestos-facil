@@ -5,44 +5,262 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#18202a">
 <title>Presupuestos Fácil</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f3f5f7;color:#17202a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
-header{background:#18202a;color:#fff;padding:18px 16px;position:sticky;top:0;z-index:5}
-header h1{margin:0;font-size:22px}
-header p{margin:3px 0 0;opacity:.72;font-size:13px}
-main{max-width:900px;margin:auto;padding:14px}
-.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
-.tabs button,.btn{border:0;border-radius:11px;padding:12px;font-weight:700;cursor:pointer;background:#e6eaee;color:#17202a}
-.tabs button.active,.primary{background:#18202a;color:white}
-.card{background:#fff;border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 2px 10px #0000000b}
-label{display:block;font-size:12px;font-weight:700;margin:10px 0 5px}
-input,textarea{width:100%;padding:11px;border:1px solid #d7dce1;border-radius:10px;font:inherit}
-textarea{min-height:80px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
-.total{text-align:right;font-size:25px;font-weight:800;margin-top:12px}
-.muted{font-size:13px;color:#68727d}
-.hidden{display:none!important}
-.item{border:1px solid #e1e5e9;border-radius:12px;padding:12px;margin-top:9px;display:flex;justify-content:space-between;gap:10px;align-items:center}
-.item strong{display:block}
-.item small{color:#68727d}
-.empty{text-align:center;padding:30px 10px;color:#68727d}
-.preview{border:1px solid #ddd;border-radius:12px;padding:20px;background:white}
-.right{text-align:right}
-.paybox{margin-top:18px;padding:15px;border:2px solid #e1e5e9;border-radius:14px;background:#fafbfc}
-.paybox h3{margin:0 0 8px}
-.payline{padding:8px 0;border-bottom:1px solid #e5e7eb}
-.paybutton{display:block;width:100%;margin-top:10px;border:0;border-radius:11px;padding:12px;font-weight:800;cursor:pointer;background:#18202a;color:#fff}
-.success{background:#eef8f1;border:1px solid #b8dfc2;border-radius:10px;padding:10px;margin-top:10px;font-size:13px}
-@media(max-width:600px){
-.grid,.actions{grid-template-columns:1fr}
-.tabs{position:sticky;top:76px;z-index:4}
+
+body{
+margin:0;
+background:#f3f5f7;
+color:#17202a;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
+
+header{
+background:#18202a;
+color:#fff;
+padding:18px 16px;
+position:sticky;
+top:0;
+z-index:5
+}
+
+header h1{
+margin:0;
+font-size:22px
+}
+
+header p{
+margin:3px 0 0;
+opacity:.72;
+font-size:13px
+}
+
+main{
+max-width:900px;
+margin:auto;
+padding:14px
+}
+
+.tabs{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-bottom:14px
+}
+
+.tabs button,.btn{
+border:0;
+border-radius:11px;
+padding:12px;
+font-weight:700;
+cursor:pointer;
+background:#e6eaee;
+color:#17202a
+}
+
+.tabs button.active,.primary{
+background:#18202a;
+color:white
+}
+
+.card{
+background:#fff;
+border-radius:16px;
+padding:16px;
+margin-bottom:14px;
+box-shadow:0 2px 10px #0000000b
+}
+
+label{
+display:block;
+font-size:12px;
+font-weight:700;
+margin:10px 0 5px
+}
+
+input,textarea{
+width:100%;
+padding:11px;
+border:1px solid #d7dce1;
+border-radius:10px;
+font:inherit
+}
+
+textarea{
+min-height:80px
+}
+
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px
+}
+
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-top:12px
+}
+
+.total{
+text-align:right;
+font-size:25px;
+font-weight:800;
+margin-top:12px
+}
+
+.muted{
+font-size:13px;
+color:#68727d
+}
+
+.hidden{
+display:none!important
+}
+
+.item{
+border:1px solid #e1e5e9;
+border-radius:12px;
+padding:12px;
+margin-top:9px;
+display:flex;
+justify-content:space-between;
+gap:10px;
+align-items:center
+}
+
+.item strong{
+display:block
+}
+
+.item small{
+color:#68727d
+}
+
+.empty{
+text-align:center;
+padding:30px 10px;
+color:#68727d
+}
+
+.preview{
+border:1px solid #ddd;
+border-radius:12px;
+padding:20px;
+background:white
+}
+
+.right{
+text-align:right
+}
+
+.paybox{
+margin-top:18px;
+padding:15px;
+border:2px solid #e1e5e9;
+border-radius:14px;
+background:#fafbfc
+}
+
+.paybox h3{
+margin:0 0 8px
+}
+
+.payline{
+padding:8px 0;
+border-bottom:1px solid #e5e7eb
+}
+
+.paybutton{
+display:block;
+width:100%;
+margin-top:10px;
+border:0;
+border-radius:11px;
+padding:12px;
+font-weight:800;
+cursor:pointer;
+background:#18202a;
+color:#fff
+}
+
+.success{
+background:#eef8f1;
+border:1px solid #b8dfc2;
+border-radius:10px;
+padding:10px;
+margin-top:10px;
+font-size:13px
+}
+
+.paywall{
+background:#fff;
+border:2px solid #18202a;
+border-radius:16px;
+padding:22px;
+margin-bottom:14px;
+text-align:center
+}
+
+.paywall h2{
+margin:0 0 8px
+}
+
+.paywall .price{
+font-size:30px;
+font-weight:800;
+margin:12px 0
+}
+
+.paywall button{
+border:0;
+border-radius:11px;
+padding:13px 18px;
+background:#18202a;
+color:#fff;
+font-weight:800;
+cursor:pointer;
+width:100%
+}
+
+.usage{
+background:#eef1f4;
+border-radius:10px;
+padding:10px;
+margin:10px 0;
+font-size:13px
+}
+
+@media(max-width:600px){
+
+.grid,.actions{
+grid-template-columns:1fr
+}
+
+.tabs{
+position:sticky;
+top:76px;
+z-index:4
+}
+
+}
+
 @media print{
-header,.tabs,form,.actions,#listSection{display:none!important}
-body{background:#fff}
-.card{box-shadow:none}
+
+header,.tabs,form,.actions,#listSection{
+display:none!important
+}
+
+body{
+background:#fff
+}
+
+.card{
+box-shadow:none
+}
+
 }
 </style>
 </head>
@@ -50,143 +268,360 @@ body{background:#fff}
 <body>
 
 <header>
+
 <h1>Presupuestos Fácil</h1>
-<p>Presupuestos profesionales · Cobro por Bizum o transferencia</p>
+
+<p>
+Presupuestos profesionales · Cobro por Bizum o transferencia
+</p>
+
 </header>
 
 <main>
 
 <div class="tabs">
-<button id="tabNew" class="active" onclick="showTab('new')">Nuevo</button>
-<button id="tabHistory" onclick="showTab('history')">Historial</button>
-<button id="tabBusiness" onclick="showTab('business')">Mi negocio</button>
+
+<button id="tabNew" class="active" onclick="showTab('new')">
+Nuevo
+</button>
+
+<button id="tabHistory" onclick="showTab('history')">
+Historial
+</button>
+
+<button id="tabBusiness" onclick="showTab('business')">
+Mi negocio
+</button>
+
 </div>
+
 
 <section id="new">
 
+<div id="usageBox" class="usage"></div>
+
+
+<div id="paywall" class="paywall hidden">
+
+<h2>
+Has usado tus 3 presupuestos gratis
+</h2>
+
+<p>
+Continúa usando Presupuestos Fácil con el plan Profesional.
+</p>
+
+<div class="price">
+4,99 € / mes
+</div>
+
+<p class="muted">
+Presupuestos ilimitados y todas las funciones de la aplicación.
+</p>
+
+<button onclick="startSubscription()">
+Desbloquear por 4,99 €/mes
+</button>
+
+<p class="muted" style="margin-top:10px">
+El botón de pago se conectará a la pasarela de pago cuando tengamos una cuenta verificada.
+</p>
+
+</div>
+
+
 <form id="quoteForm" class="card">
 
-<h2>Nuevo presupuesto</h2>
+<h2>
+Nuevo presupuesto
+</h2>
 
 <div class="grid">
 
 <div>
-<label>Cliente</label>
-<input id="client" required placeholder="Nombre del cliente">
+
+<label>
+Cliente
+</label>
+
+<input
+id="client"
+required
+placeholder="Nombre del cliente"
+>
+
 </div>
+
 
 <div>
-<label>Fecha</label>
-<input id="date" type="date">
-</div>
+
+<label>
+Fecha
+</label>
+
+<input
+id="date"
+type="date"
+>
 
 </div>
 
-<label>Trabajo / servicio</label>
-<textarea id="description" placeholder="Ej.: Limpieza de vivienda completa"></textarea>
+</div>
+
+
+<label>
+Trabajo / servicio
+</label>
+
+<textarea
+id="description"
+placeholder="Ej.: Limpieza de vivienda completa"
+></textarea>
+
 
 <div class="grid">
 
 <div>
-<label>Precio sin IVA (€)</label>
-<input id="price" type="number" step="0.01" min="0" value="0">
+
+<label>
+Precio sin IVA (€)
+</label>
+
+<input
+id="price"
+type="number"
+step="0.01"
+min="0"
+value="0"
+>
+
 </div>
+
 
 <div>
-<label>IVA (%)</label>
-<input id="tax" type="number" step="0.1" value="21">
-</div>
+
+<label>
+IVA (%)
+</label>
+
+<input
+id="tax"
+type="number"
+step="0.1"
+value="21"
+>
 
 </div>
 
-<div class="total" id="total">0,00 €</div>
+</div>
+
+
+<div class="total" id="total">
+0,00 €
+</div>
+
 
 <div class="actions">
-<button type="button" class="primary" onclick="saveQuote()">Guardar presupuesto</button>
-<button type="button" onclick="previewQuote()">Vista previa</button>
+
+<button
+type="button"
+class="primary"
+onclick="saveQuote()"
+>
+Guardar presupuesto
+</button>
+
+<button
+type="button"
+onclick="previewQuote()"
+>
+Vista previa
+</button>
+
 </div>
 
 </form>
 
+
 <div id="previewCard" class="card hidden">
 
-<h2>Vista previa</h2>
+<h2>
+Vista previa
+</h2>
 
 <div id="preview" class="preview"></div>
 
+
 <div class="actions">
-<button class="primary" onclick="window.print()">Imprimir / PDF</button>
-<button onclick="shareWhatsApp()">Enviar por WhatsApp</button>
+
+<button
+class="primary"
+onclick="window.print()"
+>
+Imprimir / PDF
+</button>
+
+<button
+onclick="shareWhatsApp()"
+>
+Enviar por WhatsApp
+</button>
+
 </div>
 
 </div>
 
 </section>
+
 
 <section id="history" class="hidden">
 
 <div class="card" id="listSection">
 
-<h2>Historial</h2>
+<h2>
+Historial
+</h2>
 
 <div id="list"></div>
 
 </div>
 
+
 <div id="historyPreview" class="card hidden">
 
-<h2>Presupuesto</h2>
+<h2>
+Presupuesto
+</h2>
 
-<div id="historyPreviewBody" class="preview"></div>
+<div
+id="historyPreviewBody"
+class="preview"
+></div>
+
 
 <div class="actions">
-<button class="primary" onclick="window.print()">Imprimir / PDF</button>
-<button onclick="shareWhatsApp()">WhatsApp</button>
+
+<button
+class="primary"
+onclick="window.print()"
+>
+Imprimir / PDF
+</button>
+
+<button
+onclick="shareWhatsApp()"
+>
+WhatsApp
+</button>
+
 </div>
 
 </div>
 
 </section>
 
+
 <section id="business" class="hidden">
 
 <div class="card">
 
-<h2>Mi negocio</h2>
+<h2>
+Mi negocio
+</h2>
 
-<label>Nombre</label>
-<input id="bizName" placeholder="Nombre de tu negocio">
 
-<label>Teléfono</label>
-<input id="bizPhone" placeholder="600 000 000">
+<label>
+Nombre
+</label>
 
-<label>Email</label>
-<input id="bizEmail" placeholder="correo@ejemplo.com">
+<input
+id="bizName"
+placeholder="Nombre de tu negocio"
+>
 
-<label>Dirección</label>
-<input id="bizAddress" placeholder="Dirección">
 
-<h3 style="margin-top:22px">Datos para cobrar</h3>
+<label>
+Teléfono
+</label>
+
+<input
+id="bizPhone"
+placeholder="600 000 000"
+>
+
+
+<label>
+Email
+</label>
+
+<input
+id="bizEmail"
+placeholder="correo@ejemplo.com"
+>
+
+
+<label>
+Dirección
+</label>
+
+<input
+id="bizAddress"
+placeholder="Dirección"
+>
+
+
+<h3 style="margin-top:22px">
+Datos para cobrar
+</h3>
 
 <p class="muted">
 Rellena solo los métodos que quieras ofrecer al cliente.
 </p>
 
-<label>Bizum</label>
-<input id="bizBizum" inputmode="tel" placeholder="Número de Bizum">
 
-<label>Titular de la cuenta</label>
-<input id="bizHolder" placeholder="Nombre del titular">
+<label>
+Bizum
+</label>
 
-<label>IBAN para transferencias</label>
-<input id="bizIban" placeholder="ES00 0000 0000 0000 0000 0000">
+<input
+id="bizBizum"
+inputmode="tel"
+placeholder="Número de Bizum"
+>
 
-<button class="primary" onclick="saveBusiness()" style="margin-top:14px;width:100%">
+
+<label>
+Titular de la cuenta
+</label>
+
+<input
+id="bizHolder"
+placeholder="Nombre del titular"
+>
+
+
+<label>
+IBAN para transferencias
+</label>
+
+<input
+id="bizIban"
+placeholder="ES00 0000 0000 0000 0000 0000"
+>
+
+
+<button
+class="primary"
+onclick="saveBusiness()"
+style="margin-top:14px;width:100%"
+>
 Guardar datos
 </button>
 
+
 <p class="muted">
-Los datos se guardan en este dispositivo. No se envían a ningún servicio externo.
+Los datos se guardan en este dispositivo.
+No se envían a ningún servicio externo.
 </p>
 
 </div>
@@ -194,6 +629,7 @@ Los datos se guardan en este dispositivo. No se envían a ningún servicio exter
 </section>
 
 </main>
+
 
 <script>
 
@@ -204,82 +640,197 @@ const $=id=>document.getElementById(id);
 $("date").value=new Date().toISOString().slice(0,10);
 
 $("price").addEventListener("input",calc);
+
 $("tax").addEventListener("input",calc);
+
 
 function calc(){
 
 let p=+$("price").value||0;
+
 let t=+$("tax").value||0;
 
-$("total").textContent=(p+p*t/100).toLocaleString("es-ES",{
+$("total").textContent=(p+p*t/100).toLocaleString(
+"es-ES",
+{
 style:"currency",
 currency:"EUR"
-});
+}
+);
 
 }
+
 
 function business(){
 
-return JSON.parse(localStorage.getItem("business")||"{}");
+return JSON.parse(
+localStorage.getItem("business")||"{}"
+);
 
 }
 
+
+function getUsage(){
+
+return Number(
+localStorage.getItem("pf_quote_count")||"0"
+);
+
+}
+
+
+function isPremium(){
+
+return localStorage.getItem("pf_premium")==="1";
+
+}
+
+
+function updateUsage(){
+
+const used=getUsage();
+
+const box=$("usageBox");
+
+const paywall=$("paywall");
+
+const form=$("quoteForm");
+
+
+if(isPremium()){
+
+box.innerHTML=
+"⭐ Plan Profesional activo · Presupuestos ilimitados";
+
+paywall.classList.add("hidden");
+
+form.classList.remove("hidden");
+
+return;
+
+}
+
+
+if(used>=3){
+
+box.innerHTML=
+"Has utilizado tus 3 presupuestos gratuitos.";
+
+paywall.classList.remove("hidden");
+
+form.classList.add("hidden");
+
+}else{
+
+let remaining=3-used;
+
+box.innerHTML=
+`🎁 ${remaining} presupuesto${remaining===1?"":"s"} gratis disponible${remaining===1?"":"s"}.`;
+
+paywall.classList.add("hidden");
+
+form.classList.remove("hidden");
+
+}
+
+}
+
+
+function startSubscription(){
+
+alert(
+"La suscripción será de 4,99 €/mes. " +
+"Para cobrarla automáticamente necesitamos conectar " +
+"una pasarela de pago verificada."
+);
+
+}
+
+
 function saveBusiness(){
 
-localStorage.setItem("business",JSON.stringify({
+localStorage.setItem(
+"business",
+JSON.stringify({
 
 name:$("bizName").value,
+
 phone:$("bizPhone").value,
+
 email:$("bizEmail").value,
+
 address:$("bizAddress").value,
+
 bizum:$("bizBizum").value,
+
 holder:$("bizHolder").value,
+
 iban:$("bizIban").value
 
-}));
+})
+);
 
 alert("Datos guardados.");
 
 }
+
 
 function loadBusiness(){
 
 let b=business();
 
 $("bizName").value=b.name||"";
+
 $("bizPhone").value=b.phone||"";
+
 $("bizEmail").value=b.email||"";
+
 $("bizAddress").value=b.address||"";
+
 $("bizBizum").value=b.bizum||"";
+
 $("bizHolder").value=b.holder||"";
+
 $("bizIban").value=b.iban||"";
 
 }
 
+
 function quoteData(){
 
 let p=+$("price").value||0;
+
 let t=+$("tax").value||0;
 
 return {
 
 id:Date.now(),
+
 client:$("client").value.trim(),
+
 date:$("date").value,
+
 description:$("description").value.trim(),
+
 price:p,
+
 tax:t,
+
 iva:p*t/100,
+
 total:p+p*t/100
 
 };
 
 }
 
+
 function paymentBox(q){
 
 let b=business();
+
 let html="";
+
 
 if(b.bizum)
 
@@ -295,6 +846,7 @@ ${esc(b.bizum)}
 
 `;
 
+
 if(b.iban)
 
 html+=`
@@ -305,7 +857,8 @@ html+=`
 
 IBAN: ${esc(b.iban)}
 
-${b.holder?`<br>Titular: ${esc(b.holder)}`:""}
+${b.holder?
+`<br>Titular: ${esc(b.holder)}`:""}
 
 <br>
 
@@ -315,13 +868,16 @@ Concepto: Presupuesto ${q.id}
 
 `;
 
+
 if(!html)
 
 return `
 
 <div class="paybox">
 
-<h3>💳 Forma de pago</h3>
+<h3>
+💳 Forma de pago
+</h3>
 
 <p class="muted">
 
@@ -333,15 +889,21 @@ Configura Bizum o transferencia en «Mi negocio».
 
 `;
 
+
 return `
 
 <div class="paybox">
 
-<h3>💳 Forma de pago</h3>
+<h3>
+💳 Forma de pago
+</h3>
 
 ${html}
 
-<button class="paybutton" onclick="sendPaymentWhatsApp()">
+<button
+class="paybutton"
+onclick="sendPaymentWhatsApp()"
+>
 
 📲 Enviar instrucciones de pago por WhatsApp
 
@@ -359,11 +921,13 @@ Después del pago, el cliente puede avisarte por WhatsApp para confirmar la rece
 
 }
 
+
 function render(q){
 
 let b=business();
 
 currentQuote=q;
+
 
 return `
 
@@ -373,6 +937,7 @@ ${esc(b.name||"Mi negocio")}
 
 </h2>
 
+
 <div class="muted">
 
 ${esc(b.phone||"")}
@@ -381,7 +946,9 @@ ${b.email?" · "+b.email:""}
 
 </div>
 
+
 <hr>
+
 
 <p>
 
@@ -393,7 +960,11 @@ ${b.email?" · "+b.email:""}
 
 </p>
 
-<h3>Servicio</h3>
+
+<h3>
+Servicio
+</h3>
+
 
 <p style="white-space:pre-wrap">
 
@@ -401,11 +972,17 @@ ${esc(q.description||"Servicio")}
 
 </p>
 
+
 <div class="right">
 
-<p>Base imponible: ${q.price.toFixed(2)} €</p>
+<p>
+Base imponible: ${q.price.toFixed(2)} €
+</p>
 
-<p>IVA (${q.tax}%): ${q.iva.toFixed(2)} €</p>
+<p>
+IVA (${q.tax}%): ${q.iva.toFixed(2)} €
+</p>
+
 
 <div class="total">
 
@@ -415,11 +992,13 @@ Total: ${q.total.toFixed(2)} €
 
 </div>
 
+
 ${paymentBox(q)}
 
 `;
 
 }
+
 
 function previewQuote(){
 
@@ -433,47 +1012,97 @@ $("previewCard").classList.remove("hidden");
 
 }
 
+
 function saveQuote(){
 
-let q=quoteData();
+if(!isPremium() && getUsage()>=3){
 
-if(!q.client){
+updateUsage();
 
-alert("Escribe el nombre del cliente.");
+alert(
+"Has alcanzado los 3 presupuestos gratuitos. " +
+"Elige el plan Profesional de 4,99 €/mes para continuar."
+);
 
 return;
 
 }
 
-let arr=JSON.parse(localStorage.getItem("quotes")||"[]");
+
+let q=quoteData();
+
+
+if(!q.client){
+
+alert(
+"Escribe el nombre del cliente."
+);
+
+return;
+
+}
+
+
+let arr=JSON.parse(
+localStorage.getItem("quotes")||"[]"
+);
+
 
 arr.unshift(q);
 
-localStorage.setItem("quotes",JSON.stringify(arr));
+
+localStorage.setItem(
+"quotes",
+JSON.stringify(arr)
+);
+
+
+if(!isPremium()){
+
+localStorage.setItem(
+"pf_quote_count",
+String(getUsage()+1)
+);
+
+}
+
 
 currentQuote=q;
+
 
 $("preview").innerHTML=render(q);
 
 $("previewCard").classList.remove("hidden");
 
-alert("Presupuesto guardado.");
+
+updateUsage();
+
+
+alert(
+"Presupuesto guardado."
+);
 
 }
 
+
 function loadList(){
 
-let arr=JSON.parse(localStorage.getItem("quotes")||"[]");
+let arr=JSON.parse(
+localStorage.getItem("quotes")||"[]"
+);
 
 let box=$("list");
 
+
 if(!arr.length){
 
-box.innerHTML='<div class="empty">Todavía no hay presupuestos guardados.</div>';
+box.innerHTML=
+'<div class="empty">Todavía no hay presupuestos guardados.</div>';
 
 return;
 
 }
+
 
 box.innerHTML=arr.map(q=>`
 
@@ -481,17 +1110,24 @@ box.innerHTML=arr.map(q=>`
 
 <div>
 
-<strong>${esc(q.client)}</strong>
+<strong>
+${esc(q.client)}
+</strong>
 
 <small>
 
-${esc(q.description||"Servicio")} · ${q.total.toFixed(2)} €
+${esc(q.description||"Servicio")}
+·
+${q.total.toFixed(2)} €
 
 </small>
 
 </div>
 
-<button onclick="openQuote(${q.id})">
+
+<button
+onclick="openQuote(${q.id})"
+>
 
 Abrir
 
@@ -503,9 +1139,12 @@ Abrir
 
 }
 
+
 function openQuote(id){
 
-let arr=JSON.parse(localStorage.getItem("quotes")||"[]");
+let arr=JSON.parse(
+localStorage.getItem("quotes")||"[]"
+);
 
 let q=arr.find(x=>x.id===id);
 
@@ -513,17 +1152,20 @@ if(!q)return;
 
 currentQuote=q;
 
-$("historyPreviewBody").innerHTML=render(q);
+$("historyPreviewBody").innerHTML=
+render(q);
 
 $("historyPreview").classList.remove("hidden");
 
 }
+
 
 function paymentText(){
 
 if(!currentQuote)return"";
 
 let b=business();
+
 
 let parts=[
 
@@ -533,67 +1175,87 @@ let parts=[
 
 ];
 
+
 if(b.bizum)
 
-parts.push(`Bizum: ${b.bizum}`);
+parts.push(
+`Bizum: ${b.bizum}`
+);
+
 
 if(b.iban)
 
-parts.push(`Transferencia: ${b.iban}${b.holder?` (Titular: ${b.holder})`:""}. Concepto: Presupuesto ${currentQuote.id}.`);
+parts.push(
+`Transferencia: ${b.iban}${b.holder?
+` (Titular: ${b.holder})`:""}. Concepto: Presupuesto ${currentQuote.id}.`
+);
 
-parts.push("Cuando realices el pago, avísame por este mismo WhatsApp.");
+
+parts.push(
+"Cuando realices el pago, avísame por este mismo WhatsApp."
+);
+
 
 return parts.join("\n");
 
 }
 
+
 function shareWhatsApp(){
 
 if(!currentQuote){
 
-alert("Genera o abre un presupuesto primero.");
+alert(
+"Genera o abre un presupuesto primero."
+);
 
 return;
 
 }
 
+
 let b=business();
+
 
 let txt=
 
 `Hola ${currentQuote.client}, te envío el presupuesto de ${b.name||"nuestro servicio"}. Total: ${currentQuote.total.toFixed(2)} €. Descripción: ${currentQuote.description||"Servicio"}.`;
 
+
 window.open(
-
-"https://wa.me/?text="+encodeURIComponent(txt),
-
+"https://wa.me/?text="+
+encodeURIComponent(txt),
 "_blank"
-
 );
 
 }
+
 
 function sendPaymentWhatsApp(){
 
 if(!currentQuote)return;
 
+
 window.open(
-
-"https://wa.me/?text="+encodeURIComponent(paymentText()),
-
+"https://wa.me/?text="+
+encodeURIComponent(paymentText()),
 "_blank"
-
 );
 
 }
+
 
 function showTab(t){
 
 ["new","history","business"].forEach(x=>
 
-$(x).classList.toggle("hidden",x!==t)
+$(x).classList.toggle(
+"hidden",
+x!==t
+)
 
 );
+
 
 ["tabNew","tabHistory","tabBusiness"].forEach(x=>
 
@@ -601,20 +1263,29 @@ $(x).classList.remove("active")
 
 );
 
-$("tab"+t.charAt(0).toUpperCase()+t.slice(1))
 
-.classList.add("active");
+$(
+"tab"+
+t.charAt(0).toUpperCase()+
+t.slice(1)
+).classList.add("active");
 
-if(t==="history")loadList();
 
-if(t==="business")loadBusiness();
+if(t==="history")
+loadList();
+
+
+if(t==="business")
+loadBusiness();
 
 }
 
+
 function esc(s){
 
-return String(s||"").replace(/[&<>"']/g,c=>
-
+return String(s||"").replace(
+/[&<>"']/g,
+c=>
 ({
 
 "&":"&amp;",
@@ -629,8 +1300,12 @@ return String(s||"").replace(/[&<>"']/g,c=>
 
 }
 
+
 calc();
+
 loadBusiness();
+
+updateUsage();
 
 </script>
 
