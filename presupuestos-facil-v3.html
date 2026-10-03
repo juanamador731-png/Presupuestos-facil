@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>Presupuestos Fácil V3</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f4f6;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+header{background:#111827;color:white;padding:18px 16px;position:sticky;top:0;z-index:5}header h1{margin:0;font-size:22px}header p{margin:4px 0 0;color:#cbd5e1;font-size:13px}
+main{max-width:900px;margin:auto;padding:14px}.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px;position:sticky;top:76px;z-index:4}.nav button,.btn{border:0;border-radius:10px;padding:11px;font-weight:700;background:#e5e7eb;color:#111827}.nav .on,.primary{background:#111827;color:white}
+.card{background:#fff;border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 2px 12px #0001}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{display:block;font-size:12px;font-weight:700;margin:10px 0 5px}input,textarea,select{width:100%;padding:11px;border:1px solid #d1d5db;border-radius:10px;font:inherit;background:white}textarea{min-height:75px}.hidden{display:none!important}.muted{color:#6b7280;font-size:13px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button{flex:1}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{padding:12px;background:#f8fafc;border-radius:12px}.stat b{display:block;font-size:21px}.stat span{font-size:12px;color:#64748b}.line{display:grid;grid-template-columns:2fr .7fr .9fr .9fr auto;gap:7px;align-items:end;margin-top:8px}.quote{border:1px solid #e5e7eb;border-radius:12px;padding:12px;margin-top:8px}.top{display:flex;justify-content:space-between;gap:8px}.badge{padding:5px 8px;border-radius:99px;font-size:11px;background:#fef3c7}.ok{background:#dcfce7;color:#166534}.bad{background:#fee2e2;color:#991b1b}.blue{background:#dbeafe;color:#1e40af}.total{text-align:right;font-size:25px;font-weight:800;margin-top:10px}.preview{border:1px solid #d1d5db;border-radius:12px;padding:20px;background:#fff}@media(max-width:650px){.grid,.stats{grid-template-columns:1fr 1fr}.line{grid-template-columns:1fr 1fr}.line:first-child{grid-column:1/-1}.nav{grid-template-columns:1fr 1fr}}@media print{header,.nav,form,.actions,#dashboard,#clients,#settings,#historyTitle{display:none!important}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+<header><h1>Presupuestos Fácil</h1><p>V3 · Gestión profesional para autónomos</p></header>
+<main>
+<div class="nav">
+<button id="bd" class="on" onclick="show('dashboard')">📊 Inicio</button>
+<button id="bq" onclick="show('quotes')">📄 Presupuestos</button>
+<button id="bc" onclick="show('clients')">👥 Clientes</button>
+<button id="bs" onclick="show('settings')">⚙️ Negocio</button>
+</div>
+
+<section id="dashboard">
+<div class="card"><h2>Resumen</h2><div class="stats">
+<div class="stat"><b id="st">0</b><span>Presupuestos</span></div>
+<div class="stat"><b id="sp">0 €</b><span>Pendiente</span></div>
+<div class="stat"><b id="sa">0 €</b><span>Aceptado</span></div>
+<div class="stat"><b id="sf">0 €</b><span>Facturado</span></div>
+</div></div>
+<div class="card"><h2>Últimos presupuestos</h2><div id="recent"></div></div>
+</section>
+
+<section id="quotes" class="hidden">
+<div class="card"><h2 id="title">Nuevo presupuesto</h2><form id="form">
+<div class="grid"><div><label>Cliente</label><select id="client"><option value="">Selecciona un cliente</option></select></div><div><label>Fecha</label><input id="date" type="date"></div></div>
+<label>Descripción</label><textarea id="desc" placeholder="Condiciones o descripción del trabajo"></textarea>
+<div id="lines"></div><button type="button" onclick="addLine()">+ Añadir línea</button>
+<div class="grid"><div><label>Descuento (€)</label><input id="discount" type="number" value="0" min="0" step=".01"></div><div><label>IVA (%)</label><input id="tax" type="number" value="21" min="0" step=".1"></div></div>
+<div class="total">Total: <span id="grand">0,00 €</span></div>
+<div class="actions"><button class="primary">Guardar presupuesto</button><button type="button" onclick="resetForm()">Cancelar</button></div>
+</form></div>
+<div class="card"><h2 id="historyTitle">Historial</h2><div id="list"></div></div>
+</section>
+
+<section id="clients" class="hidden">
+<div class="card"><h2>Nuevo cliente</h2><form id="clientForm"><div class="grid"><div><label>Nombre</label><input id="cn" required></div><div><label>Teléfono</label><input id="cp"></div><div><label>Email</label><input id="ce" type="email"></div><div><label>Dirección</label><input id="ca"></div></div><div class="actions"><button class="primary">Guardar cliente</button></div></form></div>
+<div class="card"><h2>Clientes</h2><div id="clientList"></div></div>
+</section>
+
+<section id="settings" class="hidden">
+<div class="card"><h2>Mi negocio</h2><div class="grid"><div><label>Nombre</label><input id="bn"></div><div><label>Teléfono</label><input id="bp"></div><div><label>Email</label><input id="be"></div><div><label>NIF/CIF</label><input id="bi"></div></div><label>Dirección</label><input id="ba"><div class="actions"><button class="primary" onclick="saveBiz()">Guardar datos</button></div><p class="muted">V3 guarda los datos en este dispositivo. La cuenta online y sincronización serán una siguiente fase.</p></div>
+</section>
+
+<div id="viewer" class="card hidden"><div id="view"></div><div class="actions"><button class="primary" onclick="window.print()">Imprimir / PDF</button><button onclick="share()">WhatsApp</button><button onclick="closeView()">Cerrar</button></div></div>
+</main>
+
+<script>
+const $=x=>document.getElementById(x), money=n=>(+n||0).toLocaleString("es-ES",{style:"currency",currency:"EUR"}), esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const get=(k,d=[])=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d)), put=(k,v)=>localStorage.setItem(k,JSON.stringify(v)); let current=null,edit=null;
+function show(x){["dashboard","quotes","clients","settings"].forEach(y=>$(y).classList.toggle("hidden",y!=x));["bd","bq","bc","bs"].forEach(y=>$(y).classList.remove("on"));$("b"+x[0]).classList.add("on");refresh()}
+function biz(){return get("v3biz",{})}
+function saveBiz(){put("v3biz",{name:$("bn").value,phone:$("bp").value,email:$("be").value,nif:$("bi").value,address:$("ba").value});alert("Datos guardados")}
+function loadBiz(){let b=biz();$("bn").value=b.name||"";$("bp").value=b.phone||"";$("be").value=b.email||"";$("bi").value=b.nif||"";$("ba").value=b.address||""}
+function addLine(d={name:"",qty:1,price:0}){let r=document.createElement("div");r.className="line";r.innerHTML='<div><label>Servicio</label><input class="ln" placeholder="Ej. Limpieza" value="'+esc(d.name)+'"></div><div><label>Cant.</label><input class="lq" type="number" value="'+d.qty+'" min="0" step=".01"></div><div><label>Precio</label><input class="lp" type="number" value="'+d.price+'" min="0" step=".01"></div><div><label>Importe</label><input class="lt" readonly></div><button type="button" onclick="this.parentElement.remove();calc()">×</button>';r.querySelectorAll("input").forEach(x=>x.oninput=calc);$("lines").appendChild(r);calc()}
+function rows(){return [...document.querySelectorAll(".line")].map(r=>({name:r.querySelector(".ln").value,qty:+r.querySelector(".lq").value||0,price:+r.querySelector(".lp").value||0,total:(+r.querySelector(".lq").value||0)*(+r.querySelector(".lp").value||0)}))}
+function calc(){let rs=rows(),sub=rs.reduce((a,x)=>a+x.total,0),disc=+$("discount").value||0,t=+$("tax").value||0,base=Math.max(0,sub-disc);$("grand").textContent=money(base+base*t/100);document.querySelectorAll(".lt").forEach((x,i)=>x.value=money(rs[i]?.total))}
+$("discount").oninput=calc;$("tax").oninput=calc;$("date").value=new Date().toISOString().slice(0,10);
+$("clientForm").onsubmit=e=>{e.preventDefault();let c=get("v3clients");c.push({id:Date.now(),name:$("cn").value,phone:$("cp").value,email:$("ce").value,address:$("ca").value});put("v3clients",c);e.target.reset();refresh();alert("Cliente guardado")}
+function fill(){let cs=get("v3clients"),s=$("client"),v=s.value;s.innerHTML='<option value="">Selecciona un cliente</option>'+cs.map(c=>'<option value="'+c.id+'">'+esc(c.name)+'</option>').join("");s.value=v}
+$("form").onsubmit=e=>{e.preventDefault();let cs=get("v3clients"),c=cs.find(x=>x.id==$("client").value);if(!c)return alert("Selecciona un cliente.");let rs=rows().filter(x=>x.name);if(!rs.length)return alert("Añade una línea.");let sub=rs.reduce((a,x)=>a+x.total,0),disc=+$("discount").value||0,t=+$("tax").value||0,base=Math.max(0,sub-disc),qs=get("v3quotes"),old=edit?qs.find(x=>x.id==edit):null;q={id:edit||Date.now(),number:old?.number||"P-"+String(qs.length+1).padStart(4,"0"),clientId:c.id,client:c.name,date:$("date").value,desc:$("desc").value,lines:rs,discount:disc,tax:t,total:base+base*t/100,status:old?.status||"Pendiente"};put("v3quotes",edit?qs.map(x=>x.id==edit?q:x):[q,...qs]);resetForm();refresh();alert("Presupuesto guardado")}
+function resetForm(){edit=null;$("title").textContent="Nuevo presupuesto";$("form").reset();$("date").value=new Date().toISOString().slice(0,10);$("tax").value=21;$("discount").value=0;$("lines").innerHTML="";addLine()}
+function renderQuotes(){let qs=get("v3quotes");$("list").innerHTML=qs.length?qs.map(q=>'<div class="quote"><div class="top"><div><b>'+esc(q.number)+' · '+esc(q.client)+'</b><div class="muted">'+esc(q.date)+' · '+money(q.total)+'</div></div><span class="badge '+(q.status=="Aceptado"?"ok":q.status=="Rechazado"?"bad":q.status=="Facturado"?"blue":"")+'">'+q.status+'</span></div><div class="actions"><button onclick="openQ('+q.id+')">Abrir</button><button onclick="editQ('+q.id+')">Editar</button><select onchange="status('+q.id+',this.value)"><option> Pendiente</option><option>Aceptado</option><option>Rechazado</option><option>Facturado</option></select></div></div>').join(""):"<p class='muted'>No hay presupuestos todavía.</p>"}
+function status(id,s){let qs=get("v3quotes");put("v3quotes",qs.map(q=>q.id==id?{...q,status:s.trim()}:q));refresh()}
+function editQ(id){let q=get("v3quotes").find(x=>x.id==id);edit=id;$("title").textContent="Editar "+q.number;$("client").value=q.clientId;$("date").value=q.date;$("desc").value=q.desc;$("discount").value=q.discount;$("tax").value=q.tax;$("lines").innerHTML="";q.lines.forEach(addLine);show("quotes")}
+function openQ(id){current=get("v3quotes").find(x=>x.id==id);let b=biz();$("view").innerHTML='<div class="preview"><div class="top"><div><h2>'+esc(b.name||"Mi negocio")+'</h2><div class="muted">'+esc(b.address||"")+'<br>'+esc(b.phone||"")+' '+esc(b.email||"")+'</div></div><div><b>'+current.number+'</b><br>'+current.date+'</div></div><hr><p><b>Cliente:</b> '+esc(current.client)+'</p><p>'+esc(current.desc)+'</p>'+current.lines.map(x=>'<p>'+esc(x.name)+' × '+x.qty+' — '+money(x.total)+'</p>').join("")+'<hr><div class="total">TOTAL: '+money(current.total)+'</div></div>';$("viewer").classList.remove("hidden")}
+function closeView(){$("viewer").classList.add("hidden")}
+function share(){let b=biz(),txt="Hola "+current.client+", te enviamos el presupuesto "+current.number+" de "+(b.name||"nuestro negocio")+". Total: "+money(current.total)+".";open("https://wa.me/?text="+encodeURIComponent(txt),"_blank")}
+function renderClients(){let cs=get("v3clients");$("clientList").innerHTML=cs.length?cs.map(c=>'<div class="quote"><b>'+esc(c.name)+'</b><div class="muted">'+esc(c.phone||"")+' '+esc(c.email||"")+'<br>'+esc(c.address||"")+'</div></div>').join(""):"<p class='muted'>No hay clientes todavía.</p>"}
+function stats(){let qs=get("v3quotes"),sum=s=>qs.filter(q=>q.status==s).reduce((a,q)=>a+q.total,0);$("st").textContent=qs.length;$("sp").textContent=money(sum("Pendiente"));$("sa").textContent=money(sum("Aceptado"));$("sf").textContent=money(sum("Facturado"));$("recent").innerHTML=qs.slice(0,5).map(q=>'<div class="quote"><b>'+esc(q.number)+' · '+esc(q.client)+'</b><span class="badge" style="float:right">'+q.status+'</span><div class="muted">'+money(q.total)+'</div></div>').join("")||"<p class='muted'>Crea tu primer presupuesto.</p>"}
+function refresh(){fill();renderQuotes();renderClients();stats()}loadBiz();addLine();refresh();
+</script>
+</body></html>
