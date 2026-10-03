@@ -2,11 +2,13 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#18202a">
+
 <title>Presupuestos Fácil</title>
 
 <style>
+
 *{box-sizing:border-box}
 
 body{
@@ -18,22 +20,22 @@ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 
 header{
 background:#18202a;
-color:#fff;
+color:white;
 padding:18px 16px;
 position:sticky;
 top:0;
-z-index:5
+z-index:10
 }
 
 header h1{
 margin:0;
-font-size:22px
+font-size:23px
 }
 
 header p{
-margin:3px 0 0;
-opacity:.72;
-font-size:13px
+margin:4px 0 0;
+font-size:13px;
+opacity:.75
 }
 
 main{
@@ -49,46 +51,45 @@ gap:8px;
 margin-bottom:14px
 }
 
-.tabs button,.btn{
+.tabs button{
 border:0;
-border-radius:11px;
-padding:12px;
-font-weight:700;
-cursor:pointer;
-background:#e6eaee;
+border-radius:12px;
+padding:13px 5px;
+font-weight:800;
+background:#e5e9ed;
 color:#17202a
 }
 
-.tabs button.active,.primary{
+.tabs button.active{
 background:#18202a;
 color:white
 }
 
 .card{
-background:#fff;
+background:white;
 border-radius:16px;
 padding:16px;
 margin-bottom:14px;
-box-shadow:0 2px 10px #0000000b
+box-shadow:0 2px 10px #00000012
 }
 
 label{
 display:block;
-font-size:12px;
+font-size:13px;
 font-weight:700;
-margin:10px 0 5px
+margin:12px 0 5px
 }
 
 input,textarea{
 width:100%;
-padding:11px;
-border:1px solid #d7dce1;
+padding:12px;
+border:1px solid #d5dbe1;
 border-radius:10px;
-font:inherit
+font-size:16px
 }
 
 textarea{
-min-height:80px
+min-height:90px
 }
 
 .grid{
@@ -97,63 +98,107 @@ grid-template-columns:1fr 1fr;
 gap:10px
 }
 
+button{
+cursor:pointer
+}
+
+.primary{
+background:#18202a;
+color:white;
+border:0;
+border-radius:11px;
+padding:13px;
+font-weight:800
+}
+
 .actions{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:9px;
-margin-top:12px
+margin-top:14px
 }
 
 .total{
 text-align:right;
 font-size:25px;
-font-weight:800;
-margin-top:12px
-}
-
-.muted{
-font-size:13px;
-color:#68727d
+font-weight:900;
+margin-top:14px
 }
 
 .hidden{
 display:none!important
 }
 
+/* CONTADOR */
+
+.usage{
+background:#eef2f5;
+border-radius:12px;
+padding:14px;
+margin-bottom:14px;
+font-weight:700;
+text-align:center
+}
+
+.usage strong{
+font-size:18px
+}
+
+/* SUSCRIPCIÓN */
+
+.paywall{
+background:white;
+border:2px solid #18202a;
+border-radius:16px;
+padding:22px;
+text-align:center;
+margin-bottom:14px
+}
+
+.paywall h2{
+margin:0 0 8px
+}
+
+.price{
+font-size:34px;
+font-weight:900;
+margin:15px 0
+}
+
+.paywall button{
+width:100%;
+border:0;
+border-radius:12px;
+padding:15px;
+background:#18202a;
+color:white;
+font-size:16px;
+font-weight:900
+}
+
 .item{
-border:1px solid #e1e5e9;
+border:1px solid #ddd;
 border-radius:12px;
 padding:12px;
 margin-top:9px;
 display:flex;
 justify-content:space-between;
-gap:10px;
-align-items:center
+align-items:center;
+gap:10px
 }
 
-.item strong{
-display:block
-}
-
-.item small{
-color:#68727d
-}
-
-.empty{
-text-align:center;
-padding:30px 10px;
-color:#68727d
+.item button{
+border:0;
+background:#18202a;
+color:white;
+padding:9px 12px;
+border-radius:9px
 }
 
 .preview{
 border:1px solid #ddd;
 border-radius:12px;
-padding:20px;
-background:white
-}
-
-.right{
-text-align:right
+padding:18px
 }
 
 .paybox{
@@ -164,104 +209,53 @@ border-radius:14px;
 background:#fafbfc
 }
 
-.paybox h3{
-margin:0 0 8px
-}
-
 .payline{
 padding:8px 0;
 border-bottom:1px solid #e5e7eb
 }
 
 .paybutton{
-display:block;
 width:100%;
 margin-top:10px;
 border:0;
 border-radius:11px;
 padding:12px;
 font-weight:800;
-cursor:pointer;
 background:#18202a;
-color:#fff
+color:white
 }
 
-.success{
-background:#eef8f1;
-border:1px solid #b8dfc2;
-border-radius:10px;
-padding:10px;
-margin-top:10px;
-font-size:13px
-}
-
-.paywall{
-background:#fff;
-border:2px solid #18202a;
-border-radius:16px;
-padding:22px;
-margin-bottom:14px;
-text-align:center
-}
-
-.paywall h2{
-margin:0 0 8px
-}
-
-.paywall .price{
-font-size:30px;
-font-weight:800;
-margin:12px 0
-}
-
-.paywall button{
-border:0;
-border-radius:11px;
-padding:13px 18px;
-background:#18202a;
-color:#fff;
-font-weight:800;
-cursor:pointer;
-width:100%
-}
-
-.usage{
-background:#eef1f4;
-border-radius:10px;
-padding:10px;
-margin:10px 0;
-font-size:13px
+.muted{
+font-size:13px;
+color:#68727d
 }
 
 @media(max-width:600px){
 
-.grid,.actions{
+.grid,
+.actions{
 grid-template-columns:1fr
-}
-
-.tabs{
-position:sticky;
-top:76px;
-z-index:4
 }
 
 }
 
 @media print{
 
-header,.tabs,form,.actions,#listSection{
+header,
+.tabs,
+form,
+.actions,
+#usageBox,
+#paywall{
 display:none!important
 }
 
 body{
-background:#fff
-}
-
-.card{
-box-shadow:none
+background:white
 }
 
 }
+
 </style>
 </head>
 
@@ -272,7 +266,7 @@ box-shadow:none
 <h1>Presupuestos Fácil</h1>
 
 <p>
-Presupuestos profesionales · Cobro por Bizum o transferencia
+Crea presupuestos profesionales de forma rápida
 </p>
 
 </header>
@@ -281,20 +275,29 @@ Presupuestos profesionales · Cobro por Bizum o transferencia
 
 <div class="tabs">
 
-<button id="tabNew" class="active" onclick="showTab('new')">
+<button
+id="tabNew"
+class="active"
+onclick="showTab('new')">
 Nuevo
 </button>
 
-<button id="tabHistory" onclick="showTab('history')">
+<button
+id="tabHistory"
+onclick="showTab('history')">
 Historial
 </button>
 
-<button id="tabBusiness" onclick="showTab('business')">
+<button
+id="tabBusiness"
+onclick="showTab('business')">
 Mi negocio
 </button>
 
 </div>
 
+
+<!-- NUEVO -->
 
 <section id="new">
 
@@ -304,37 +307,42 @@ Mi negocio
 <div id="paywall" class="paywall hidden">
 
 <h2>
-Has usado tus 3 presupuestos gratis
+🔒 Presupuestos gratuitos agotados
 </h2>
 
 <p>
-Continúa usando Presupuestos Fácil con el plan Profesional.
+Has utilizado tus 3 presupuestos gratuitos.
 </p>
 
 <div class="price">
 4,99 € / mes
 </div>
 
-<p class="muted">
-Presupuestos ilimitados y todas las funciones de la aplicación.
+<p>
+Presupuestos ilimitados para tu negocio.
 </p>
 
-<button onclick="startSubscription()">
-Desbloquear por 4,99 €/mes
+<button onclick="subscribe()">
+⭐ Desbloquear Profesional
 </button>
 
-<p class="muted" style="margin-top:10px">
-El botón de pago se conectará a la pasarela de pago cuando tengamos una cuenta verificada.
+<p class="muted">
+Pago mensual de 4,99 €.
 </p>
 
 </div>
 
 
-<form id="quoteForm" class="card">
+<form
+id="quoteForm"
+class="card"
+onsubmit="saveQuote();return false"
+>
 
 <h2>
 Nuevo presupuesto
 </h2>
+
 
 <div class="grid">
 
@@ -346,8 +354,8 @@ Cliente
 
 <input
 id="client"
-required
 placeholder="Nombre del cliente"
+required
 >
 
 </div>
@@ -375,7 +383,7 @@ Trabajo / servicio
 
 <textarea
 id="description"
-placeholder="Ej.: Limpieza de vivienda completa"
+placeholder="Describe el trabajo"
 ></textarea>
 
 
@@ -384,7 +392,7 @@ placeholder="Ej.: Limpieza de vivienda completa"
 <div>
 
 <label>
-Precio sin IVA (€)
+Precio (€)
 </label>
 
 <input
@@ -407,7 +415,6 @@ IVA (%)
 <input
 id="tax"
 type="number"
-step="0.1"
 value="21"
 >
 
@@ -416,7 +423,9 @@ value="21"
 </div>
 
 
-<div class="total" id="total">
+<div
+id="total"
+class="total">
 0,00 €
 </div>
 
@@ -424,17 +433,14 @@ value="21"
 <div class="actions">
 
 <button
-type="button"
-class="primary"
-onclick="saveQuote()"
->
+type="submit"
+class="primary">
 Guardar presupuesto
 </button>
 
 <button
 type="button"
-onclick="previewQuote()"
->
+onclick="previewQuote()">
 Vista previa
 </button>
 
@@ -443,30 +449,17 @@ Vista previa
 </form>
 
 
-<div id="previewCard" class="card hidden">
+<div
+id="previewCard"
+class="card hidden">
 
 <h2>
 Vista previa
 </h2>
 
-<div id="preview" class="preview"></div>
-
-
-<div class="actions">
-
-<button
-class="primary"
-onclick="window.print()"
->
-Imprimir / PDF
-</button>
-
-<button
-onclick="shareWhatsApp()"
->
-Enviar por WhatsApp
-</button>
-
+<div
+id="preview"
+class="preview">
 </div>
 
 </div>
@@ -474,9 +467,13 @@ Enviar por WhatsApp
 </section>
 
 
-<section id="history" class="hidden">
+<!-- HISTORIAL -->
 
-<div class="card" id="listSection">
+<section
+id="history"
+class="hidden">
+
+<div class="card">
 
 <h2>
 Historial
@@ -486,42 +483,14 @@ Historial
 
 </div>
 
-
-<div id="historyPreview" class="card hidden">
-
-<h2>
-Presupuesto
-</h2>
-
-<div
-id="historyPreviewBody"
-class="preview"
-></div>
-
-
-<div class="actions">
-
-<button
-class="primary"
-onclick="window.print()"
->
-Imprimir / PDF
-</button>
-
-<button
-onclick="shareWhatsApp()"
->
-WhatsApp
-</button>
-
-</div>
-
-</div>
-
 </section>
 
 
-<section id="business" class="hidden">
+<!-- MI NEGOCIO -->
+
+<section
+id="business"
+class="hidden">
 
 <div class="card">
 
@@ -570,13 +539,9 @@ placeholder="Dirección"
 >
 
 
-<h3 style="margin-top:22px">
+<h3>
 Datos para cobrar
 </h3>
-
-<p class="muted">
-Rellena solo los métodos que quieras ofrecer al cliente.
-</p>
 
 
 <label>
@@ -585,44 +550,38 @@ Bizum
 
 <input
 id="bizBizum"
-inputmode="tel"
 placeholder="Número de Bizum"
 >
 
 
 <label>
-Titular de la cuenta
+Titular
 </label>
 
 <input
 id="bizHolder"
-placeholder="Nombre del titular"
+placeholder="Titular de la cuenta"
 >
 
 
 <label>
-IBAN para transferencias
+IBAN
 </label>
 
 <input
 id="bizIban"
-placeholder="ES00 0000 0000 0000 0000 0000"
+placeholder="ES00..."
 >
 
 
 <button
 class="primary"
 onclick="saveBusiness()"
-style="margin-top:14px;width:100%"
->
+style="width:100%;margin-top:14px">
+
 Guardar datos
+
 </button>
-
-
-<p class="muted">
-Los datos se guardan en este dispositivo.
-No se envían a ningún servicio externo.
-</p>
 
 </div>
 
@@ -633,24 +592,45 @@ No se envían a ningún servicio externo.
 
 <script>
 
+const FREE_LIMIT=3;
+
 let currentQuote=null;
 
 const $=id=>document.getElementById(id);
 
-$("date").value=new Date().toISOString().slice(0,10);
 
-$("price").addEventListener("input",calc);
+/* FECHA */
 
-$("tax").addEventListener("input",calc);
+$("date").value=
+new Date().toISOString().slice(0,10);
 
 
-function calc(){
+/* PRECIO */
 
-let p=+$("price").value||0;
+$("price").addEventListener(
+"input",
+calculate
+);
 
-let t=+$("tax").value||0;
+$("tax").addEventListener(
+"input",
+calculate
+);
 
-$("total").textContent=(p+p*t/100).toLocaleString(
+
+function calculate(){
+
+let price=
+Number($("price").value)||0;
+
+let tax=
+Number($("tax").value)||0;
+
+let total=
+price+(price*tax/100);
+
+$("total").textContent=
+total.toLocaleString(
 "es-ES",
 {
 style:"currency",
@@ -661,19 +641,24 @@ currency:"EUR"
 }
 
 
-function business(){
+/* CONTADOR */
 
-return JSON.parse(
-localStorage.getItem("business")||"{}"
+function getCount(){
+
+return Number(
+localStorage.getItem(
+"presupuestos_count"
+)||0
 );
 
 }
 
 
-function getUsage(){
+function setCount(value){
 
-return Number(
-localStorage.getItem("pf_quote_count")||"0"
+localStorage.setItem(
+"presupuestos_count",
+value
 );
 
 }
@@ -681,77 +666,87 @@ localStorage.getItem("pf_quote_count")||"0"
 
 function isPremium(){
 
-return localStorage.getItem("pf_premium")==="1";
+return localStorage.getItem(
+"presupuestos_premium"
+)==="true";
 
 }
 
 
-function updateUsage(){
+function updateCounter(){
 
-const used=getUsage();
+let count=getCount();
 
-const box=$("usageBox");
+let box=$("usageBox");
 
-const paywall=$("paywall");
+let form=$("quoteForm");
 
-const form=$("quoteForm");
+let wall=$("paywall");
 
 
 if(isPremium()){
 
 box.innerHTML=
-"⭐ Plan Profesional activo · Presupuestos ilimitados";
-
-paywall.classList.add("hidden");
+"⭐ <strong>Plan Profesional activo</strong><br>Presupuestos ilimitados";
 
 form.classList.remove("hidden");
+
+wall.classList.add("hidden");
 
 return;
 
 }
 
 
-if(used>=3){
+let remaining=
+FREE_LIMIT-count;
+
+
+if(remaining<=0){
 
 box.innerHTML=
-"Has utilizado tus 3 presupuestos gratuitos.";
-
-paywall.classList.remove("hidden");
+"🔒 <strong>Has utilizado tus 3 presupuestos gratis</strong>";
 
 form.classList.add("hidden");
 
+wall.classList.remove("hidden");
+
 }else{
 
-let remaining=3-used;
-
 box.innerHTML=
-`🎁 ${remaining} presupuesto${remaining===1?"":"s"} gratis disponible${remaining===1?"":"s"}.`;
-
-paywall.classList.add("hidden");
+"🎁 <strong>"+
+remaining+
+"</strong> presupuesto"+
+(remaining===1?"":"s")+
+" gratis disponible"+
+(remaining===1?"":"s");
 
 form.classList.remove("hidden");
 
-}
+wall.classList.add("hidden");
 
 }
 
+}
 
-function startSubscription(){
+
+/* SUSCRIPCIÓN */
+
+function subscribe(){
 
 alert(
-"La suscripción será de 4,99 €/mes. " +
-"Para cobrarla automáticamente necesitamos conectar " +
-"una pasarela de pago verificada."
+"Plan Profesional: 4,99 € al mes.\n\n"+
+"El siguiente paso es conectar un sistema de pago para poder cobrar la suscripción automáticamente."
 );
 
 }
 
 
+/* NEGOCIO */
+
 function saveBusiness(){
 
-localStorage.setItem(
-"business",
-JSON.stringify({
+let data={
 
 name:$("bizName").value,
 
@@ -767,17 +762,28 @@ holder:$("bizHolder").value,
 
 iban:$("bizIban").value
 
-})
+};
+
+localStorage.setItem(
+"business",
+JSON.stringify(data)
 );
 
-alert("Datos guardados.");
+alert(
+"Datos guardados correctamente."
+);
 
 }
 
 
 function loadBusiness(){
 
-let b=business();
+let b=
+JSON.parse(
+localStorage.getItem(
+"business"
+)||"{}"
+);
 
 $("bizName").value=b.name||"";
 
@@ -796,243 +802,55 @@ $("bizIban").value=b.iban||"";
 }
 
 
-function quoteData(){
+/* PRESUPUESTO */
 
-let p=+$("price").value||0;
+function getQuote(){
 
-let t=+$("tax").value||0;
+let price=
+Number($("price").value)||0;
 
-return {
+let tax=
+Number($("tax").value)||0;
+
+return{
 
 id:Date.now(),
 
-client:$("client").value.trim(),
+client:$("client").value,
 
 date:$("date").value,
 
-description:$("description").value.trim(),
+description:$("description").value,
 
-price:p,
+price:price,
 
-tax:t,
+tax:tax,
 
-iva:p*t/100,
+iva:price*tax/100,
 
-total:p+p*t/100
+total:price+(price*tax/100)
 
 };
 
 }
 
 
-function paymentBox(q){
-
-let b=business();
-
-let html="";
-
-
-if(b.bizum)
-
-html+=`
-
-<div class="payline">
-
-<b>📱 Bizum</b><br>
-
-${esc(b.bizum)}
-
-</div>
-
-`;
-
-
-if(b.iban)
-
-html+=`
-
-<div class="payline">
-
-<b>🏦 Transferencia bancaria</b><br>
-
-IBAN: ${esc(b.iban)}
-
-${b.holder?
-`<br>Titular: ${esc(b.holder)}`:""}
-
-<br>
-
-Concepto: Presupuesto ${q.id}
-
-</div>
-
-`;
-
-
-if(!html)
-
-return `
-
-<div class="paybox">
-
-<h3>
-💳 Forma de pago
-</h3>
-
-<p class="muted">
-
-Configura Bizum o transferencia en «Mi negocio».
-
-</p>
-
-</div>
-
-`;
-
-
-return `
-
-<div class="paybox">
-
-<h3>
-💳 Forma de pago
-</h3>
-
-${html}
-
-<button
-class="paybutton"
-onclick="sendPaymentWhatsApp()"
->
-
-📲 Enviar instrucciones de pago por WhatsApp
-
-</button>
-
-<div class="success">
-
-Después del pago, el cliente puede avisarte por WhatsApp para confirmar la recepción.
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-function render(q){
-
-let b=business();
-
-currentQuote=q;
-
-
-return `
-
-<h2 style="margin:0 0 3px">
-
-${esc(b.name||"Mi negocio")}
-
-</h2>
-
-
-<div class="muted">
-
-${esc(b.phone||"")}
-
-${b.email?" · "+b.email:""}
-
-</div>
-
-
-<hr>
-
-
-<p>
-
-<b>Presupuesto</b> · ${esc(q.date)}
-
-<br>
-
-<b>Cliente:</b> ${esc(q.client)}
-
-</p>
-
-
-<h3>
-Servicio
-</h3>
-
-
-<p style="white-space:pre-wrap">
-
-${esc(q.description||"Servicio")}
-
-</p>
-
-
-<div class="right">
-
-<p>
-Base imponible: ${q.price.toFixed(2)} €
-</p>
-
-<p>
-IVA (${q.tax}%): ${q.iva.toFixed(2)} €
-</p>
-
-
-<div class="total">
-
-Total: ${q.total.toFixed(2)} €
-
-</div>
-
-</div>
-
-
-${paymentBox(q)}
-
-`;
-
-}
-
-
-function previewQuote(){
-
-let q=quoteData();
-
-currentQuote=q;
-
-$("preview").innerHTML=render(q);
-
-$("previewCard").classList.remove("hidden");
-
-}
-
-
 function saveQuote(){
 
-if(!isPremium() && getUsage()>=3){
+if(!isPremium() &&
+getCount()>=FREE_LIMIT){
 
-updateUsage();
-
-alert(
-"Has alcanzado los 3 presupuestos gratuitos. " +
-"Elige el plan Profesional de 4,99 €/mes para continuar."
-);
+updateCounter();
 
 return;
 
 }
 
 
-let q=quoteData();
+let q=getQuote();
 
 
-if(!q.client){
+if(!q.client.trim()){
 
 alert(
 "Escribe el nombre del cliente."
@@ -1043,25 +861,26 @@ return;
 }
 
 
-let arr=JSON.parse(
-localStorage.getItem("quotes")||"[]"
+let quotes=
+JSON.parse(
+localStorage.getItem(
+"quotes"
+)||"[]"
 );
 
-
-arr.unshift(q);
+quotes.unshift(q);
 
 
 localStorage.setItem(
 "quotes",
-JSON.stringify(arr)
+JSON.stringify(quotes)
 );
 
 
 if(!isPremium()){
 
-localStorage.setItem(
-"pf_quote_count",
-String(getUsage()+1)
+setCount(
+getCount()+1
 );
 
 }
@@ -1069,65 +888,206 @@ String(getUsage()+1)
 
 currentQuote=q;
 
+$("preview").innerHTML=
+renderQuote(q);
 
-$("preview").innerHTML=render(q);
-
-$("previewCard").classList.remove("hidden");
-
-
-updateUsage();
+$("previewCard")
+.classList.remove("hidden");
 
 
-alert(
-"Presupuesto guardado."
-);
+updateCounter();
 
 }
 
 
-function loadList(){
+/* VISTA PREVIA */
 
-let arr=JSON.parse(
-localStorage.getItem("quotes")||"[]"
+function previewQuote(){
+
+let q=getQuote();
+
+currentQuote=q;
+
+$("preview").innerHTML=
+renderQuote(q);
+
+$("previewCard")
+.classList.remove("hidden");
+
+}
+
+
+/* MOSTRAR PRESUPUESTO */
+
+function renderQuote(q){
+
+let b=
+JSON.parse(
+localStorage.getItem(
+"business"
+)||"{}"
 );
 
-let box=$("list");
+let payment="";
 
 
-if(!arr.length){
+if(b.bizum){
 
-box.innerHTML=
-'<div class="empty">Todavía no hay presupuestos guardados.</div>';
+payment+=`
+
+<div class="payline">
+
+<b>📱 Bizum</b><br>
+
+${escapeHTML(b.bizum)}
+
+</div>
+
+`;
+
+}
+
+
+if(b.iban){
+
+payment+=`
+
+<div class="payline">
+
+<b>🏦 Transferencia</b><br>
+
+IBAN:
+${escapeHTML(b.iban)}
+
+<br>
+
+${b.holder?
+"Titular: "+
+escapeHTML(b.holder):
+""}
+
+<br>
+
+Concepto:
+Presupuesto ${q.id}
+
+</div>
+
+`;
+
+}
+
+
+return`
+
+<h2>
+${escapeHTML(
+b.name||"Presupuesto"
+)}
+</h2>
+
+<p>
+<b>Cliente:</b>
+${escapeHTML(q.client)}
+</p>
+
+<p>
+<b>Fecha:</b>
+${escapeHTML(q.date)}
+</p>
+
+<hr>
+
+<h3>
+Servicio
+</h3>
+
+<p>
+${escapeHTML(
+q.description||"Servicio"
+)}
+</p>
+
+<p>
+Base:
+${q.price.toFixed(2)} €
+</p>
+
+<p>
+IVA:
+${q.iva.toFixed(2)} €
+</p>
+
+<div class="total">
+
+Total:
+${q.total.toFixed(2)} €
+
+</div>
+
+<div class="paybox">
+
+<h3>
+💳 Forma de pago
+</h3>
+
+${payment||
+
+"Configura Bizum o transferencia en Mi negocio."
+}
+
+</div>
+
+`;
+
+}
+
+
+/* HISTORIAL */
+
+function loadHistory(){
+
+let quotes=
+JSON.parse(
+localStorage.getItem(
+"quotes"
+)||"[]"
+);
+
+let list=$("list");
+
+
+if(!quotes.length){
+
+list.innerHTML=
+"<p class='muted'>No hay presupuestos todavía.</p>";
 
 return;
 
 }
 
 
-box.innerHTML=arr.map(q=>`
+list.innerHTML=
+quotes.map(q=>`
 
 <div class="item">
 
 <div>
 
-<strong>
-${esc(q.client)}
-</strong>
+<b>
+${escapeHTML(q.client)}
+</b>
 
-<small>
+<br>
 
-${esc(q.description||"Servicio")}
-·
+<span class="muted">
 ${q.total.toFixed(2)} €
-
-</small>
+</span>
 
 </div>
 
-
 <button
-onclick="openQuote(${q.id})"
->
+onclick="openQuote(${q.id})">
 
 Abrir
 
@@ -1142,170 +1102,118 @@ Abrir
 
 function openQuote(id){
 
-let arr=JSON.parse(
-localStorage.getItem("quotes")||"[]"
+let quotes=
+JSON.parse(
+localStorage.getItem(
+"quotes"
+)||"[]"
 );
 
-let q=arr.find(x=>x.id===id);
+let q=
+quotes.find(
+x=>x.id===id
+);
 
 if(!q)return;
 
 currentQuote=q;
 
-$("historyPreviewBody").innerHTML=
-render(q);
+$("previewCard")
+.classList.remove("hidden");
 
-$("historyPreview").classList.remove("hidden");
+$("preview").innerHTML=
+renderQuote(q);
 
-}
-
-
-function paymentText(){
-
-if(!currentQuote)return"";
-
-let b=business();
-
-
-let parts=[
-
-`Hola ${currentQuote.client}, te envío las instrucciones de pago del presupuesto ${currentQuote.id}.`,
-
-`Importe total: ${currentQuote.total.toFixed(2)} €.`
-
-];
-
-
-if(b.bizum)
-
-parts.push(
-`Bizum: ${b.bizum}`
-);
-
-
-if(b.iban)
-
-parts.push(
-`Transferencia: ${b.iban}${b.holder?
-` (Titular: ${b.holder})`:""}. Concepto: Presupuesto ${currentQuote.id}.`
-);
-
-
-parts.push(
-"Cuando realices el pago, avísame por este mismo WhatsApp."
-);
-
-
-return parts.join("\n");
+showTab("new");
 
 }
 
 
-function shareWhatsApp(){
+/* PESTAÑAS */
 
-if(!currentQuote){
+function showTab(tab){
 
-alert(
-"Genera o abre un presupuesto primero."
-);
+$("new").classList.add("hidden");
 
-return;
+$("history").classList.add("hidden");
 
-}
+$("business").classList.add("hidden");
 
 
-let b=business();
+$("tabNew").classList.remove("active");
+
+$("tabHistory").classList.remove("active");
+
+$("tabBusiness").classList.remove("active");
 
 
-let txt=
+if(tab==="new"){
 
-`Hola ${currentQuote.client}, te envío el presupuesto de ${b.name||"nuestro servicio"}. Total: ${currentQuote.total.toFixed(2)} €. Descripción: ${currentQuote.description||"Servicio"}.`;
+$("new").classList.remove("hidden");
 
+$("tabNew").classList.add("active");
 
-window.open(
-"https://wa.me/?text="+
-encodeURIComponent(txt),
-"_blank"
-);
-
-}
-
-
-function sendPaymentWhatsApp(){
-
-if(!currentQuote)return;
-
-
-window.open(
-"https://wa.me/?text="+
-encodeURIComponent(paymentText()),
-"_blank"
-);
+updateCounter();
 
 }
 
 
-function showTab(t){
+if(tab==="history"){
 
-["new","history","business"].forEach(x=>
+$("history").classList.remove("hidden");
 
-$(x).classList.toggle(
-"hidden",
-x!==t
-)
+$("tabHistory").classList.add("active");
 
-);
+loadHistory();
 
-
-["tabNew","tabHistory","tabBusiness"].forEach(x=>
-
-$(x).classList.remove("active")
-
-);
+}
 
 
-$(
-"tab"+
-t.charAt(0).toUpperCase()+
-t.slice(1)
-).classList.add("active");
+if(tab==="business"){
 
+$("business").classList.remove("hidden");
 
-if(t==="history")
-loadList();
+$("tabBusiness").classList.add("active");
 
-
-if(t==="business")
 loadBusiness();
 
 }
 
+}
 
-function esc(s){
 
-return String(s||"").replace(
+/* SEGURIDAD HTML */
+
+function escapeHTML(text){
+
+return String(text||"")
+.replace(
 /[&<>"']/g,
-c=>
-({
+function(c){
+
+return{
 
 "&":"&amp;",
 "<":"&lt;",
 ">":"&gt;",
 '"':"&quot;",
-"'":"&#39;"
+"'":"&#039;"
 
-}[c])
+}[c];
 
+}
 );
 
 }
 
 
-calc();
+/* INICIO */
+
+calculate();
 
 loadBusiness();
 
-updateUsage();
+updateCounter();
 
 </script>
 
